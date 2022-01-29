@@ -1,5 +1,3 @@
-from inspect import Attribute
-from urllib import response
 import pytest
 
 def test_basic_route_adding(api):
@@ -69,6 +67,18 @@ def test_class_based_method_not_allowed(api, client):
             
     with pytest.raises(AssertionError):
         client.get("http://testserver/book")
+        
+        
+def test_alternative_route(api, client):
+    
+    response_text = "Alternative route"
+    
+    def home(req, resp):
+        resp.text = response_text
+        
+    api.add_route('/alternative', home)
+    
+    assert client.get("http://testserver/alternative").text == response_text
             
             
 
