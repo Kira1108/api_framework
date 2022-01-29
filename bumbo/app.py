@@ -31,6 +31,11 @@ class BookResource:
     def post(self, req, resp):
         resp.text = "Book page of post"
         
+def simplehandler(req, resp):
+    resp.text = "This is a simple handler"
+    
+app.add_route('/sample', simplehandler)
+        
 
     
 
